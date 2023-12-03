@@ -1,0 +1,9 @@
+﻿  CryptPayload.c
+F:\BypassAV_Framework\CryptPayload\CryptPayload.c(87,21): warning C4133: функция: несовместимые типы - из "uint32_t *" в "uint8_t *"
+F:\BypassAV_Framework\CryptPayload\CryptPayload.c(98,21): warning C4133: функция: несовместимые типы - из "uint32_t *" в "uint8_t *"
+F:\BypassAV_Framework\CryptPayload\CryptPayload.c(82,1): warning C4267: инициализация: преобразование из "size_t" в "uint32_t"; возможна потеря данных
+  Создание кода
+  Previous IPDB not found, fall back to full compilation.
+  All 7 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  CryptPayload.vcxproj -> F:\BypassAV_Framework\BypassAV_Framework\x64\Release\CryptPayload.exe
