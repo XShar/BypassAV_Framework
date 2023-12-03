@@ -1,4 +1,4 @@
-﻿.data
+.data
 	dwSSN	DWORD	0h	; SYSCALL SSN
 	qAddr	QWORD	0h	; `syscall` INSTRUCTION ADDRESS (INSIDE OF NTDLL)
 
