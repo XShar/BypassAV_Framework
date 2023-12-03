@@ -1,8 +1,8 @@
-#pragma once
+п»ї#pragma once
 
 #include <Windows.h>
 #include <stdio.h>
-#include <Winternl.h>  // Для функций NtDll и структур
+#include <Winternl.h>  // Р”Р»СЏ С„СѓРЅРєС†РёР№ NtDll Рё СЃС‚СЂСѓРєС‚СѓСЂ
 #include <HellsHall.h>
 
 #define PRINTA( STR, ... )                                                                  \
@@ -15,7 +15,7 @@
         }                                                                                   \
     }
 
-// Объявление _fltused для поддержки плавающей точки без CRT
+// РћР±СЉСЏРІР»РµРЅРёРµ _fltused РґР»СЏ РїРѕРґРґРµСЂР¶РєРё РїР»Р°РІР°СЋС‰РµР№ С‚РѕС‡РєРё Р±РµР· CRT
 #ifdef _MSC_VER
 __declspec(selectany) int _fltused = 0;
 #endif

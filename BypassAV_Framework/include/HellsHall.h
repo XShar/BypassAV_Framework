@@ -1,4 +1,4 @@
-#ifndef HELLHALL_H
+﻿#ifndef HELLHALL_H
 #define HELLHALL_H
 
 #include <Windows.h>

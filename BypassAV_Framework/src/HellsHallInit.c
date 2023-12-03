@@ -1,4 +1,4 @@
-#include <helper.h>
+﻿#include <helper.h>
 #include <HellsHall.h>
 
 static HellsHallStruct S = { 0 };

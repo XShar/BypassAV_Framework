@@ -1,11 +1,11 @@
-
+п»ї
 
 #include <stdio.h>
 #include <wchar.h>
 #include <helper.h>
 #include <HellsHall.h>
 
-// Название нового потока данных
+// РќР°Р·РІР°РЅРёРµ РЅРѕРІРѕРіРѕ РїРѕС‚РѕРєР° РґР°РЅРЅС‹С…
 #define NEW_STREAM L"NewT"
 
 static void RtlInitUnicodeString(UNICODE_STRING* DestinationString, PCWSTR SourceString) {
@@ -58,28 +58,28 @@ BOOL NtDeleteSelf()
 
     pHellsHallStruct S = GetHellsHallStruct();
 
-    // Выделение достаточного буфера для структуры 'FILE_RENAME_INFO'
+    // Р’С‹РґРµР»РµРЅРёРµ РґРѕСЃС‚Р°С‚РѕС‡РЅРѕРіРѕ Р±СѓС„РµСЂР° РґР»СЏ СЃС‚СЂСѓРєС‚СѓСЂС‹ 'FILE_RENAME_INFO'
     pRename = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sRename);
     if (!pRename) {
         PRINTA("[!] HeapAlloc error: %d\n", GetLastError());
         return FALSE;
     }
 
-    // Очистка структур
+    // РћС‡РёСЃС‚РєР° СЃС‚СЂСѓРєС‚СѓСЂ
     ZeroMemory(szPath, sizeof(szPath));
     ZeroMemory(&Delete, sizeof(FILE_DISPOSITION_INFO));
 
-    // Маркировка файла для удаления (используется во втором вызове SetFileInformationByHandle)
+    // РњР°СЂРєРёСЂРѕРІРєР° С„Р°Р№Р»Р° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ (РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІРѕ РІС‚РѕСЂРѕРј РІС‹Р·РѕРІРµ SetFileInformationByHandle)
     Delete.DeleteFile = TRUE;
 
-    // Установка имени нового потока данных и его размера в структуре 'FILE_RENAME_INFO'
+    // РЈСЃС‚Р°РЅРѕРІРєР° РёРјРµРЅРё РЅРѕРІРѕРіРѕ РїРѕС‚РѕРєР° РґР°РЅРЅС‹С… Рё РµРіРѕ СЂР°Р·РјРµСЂР° РІ СЃС‚СЂСѓРєС‚СѓСЂРµ 'FILE_RENAME_INFO'
     pRename->FileNameLength = sizeof(NewStream);
     RtlCopyMemory(pRename->FileName, NewStream, sizeof(NewStream));
 
     OBJECT_ATTRIBUTES vObjectAttributes;
     UNICODE_STRING ustrObjectName;
 
-    wchar_t ptcsNameRet[MAX_PATH + 4]; // Дополнительные символы для "\\?\\"
+    wchar_t ptcsNameRet[MAX_PATH + 4]; // Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЃРёРјРІРѕР»С‹ РґР»СЏ "\\?\\"
     GetExecutablePathWithoutCRT(ptcsNameRet, sizeof(ptcsNameRet) / sizeof(wchar_t));
 
     PRINTA("[!] ptcsNameRet :%S\n", ptcsNameRet);
@@ -93,7 +93,7 @@ BOOL NtDeleteSelf()
         PRINTA("[!] Error NtOpenFile [R] :%x\n", status);
     }
 
-    // Маркировка для удаления после закрытия дескриптора файла
+    // РњР°СЂРєРёСЂРѕРІРєР° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ РїРѕСЃР»Рµ Р·Р°РєСЂС‹С‚РёСЏ РґРµСЃРєСЂРёРїС‚РѕСЂР° С„Р°Р№Р»Р°
     SYSCALL(S->NtSetInformationFile);
     status = HellHall(hFile, &IoStatusBlock, pRename, sRename, 10);
     if (FAILED(status)) 
@@ -115,7 +115,7 @@ BOOL NtDeleteSelf()
 
     PRINTA("[i] Del ...\n");
 
-    // Маркировка для удаления после закрытия дескриптора файла
+    // РњР°СЂРєРёСЂРѕРІРєР° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ РїРѕСЃР»Рµ Р·Р°РєСЂС‹С‚РёСЏ РґРµСЃРєСЂРёРїС‚РѕСЂР° С„Р°Р№Р»Р°
     SYSCALL(S->NtSetInformationFile);
     status = HellHall(hFile, &IoStatusBlock, pRename, sRename, 13);
     if (FAILED(status)) 
@@ -127,7 +127,7 @@ BOOL NtDeleteSelf()
     SYSCALL(S->NtClose);
     HellHall(hFile);
 
-    // Освобождение выделенного буфера
+    // РћСЃРІРѕР±РѕР¶РґРµРЅРёРµ РІС‹РґРµР»РµРЅРЅРѕРіРѕ Р±СѓС„РµСЂР°
     HeapFree(GetProcessHeap(), 0, pRename);
 
     return TRUE;
@@ -135,27 +135,27 @@ BOOL NtDeleteSelf()
 
 static BOOL LoopThread()
 {
-    // Создание waitable таймера
+    // РЎРѕР·РґР°РЅРёРµ waitable С‚Р°Р№РјРµСЂР°
     HANDLE hTimer = CreateWaitableTimer(NULL, TRUE, NULL);
     if (hTimer == NULL) {
-        // Обработка ошибки создания таймера
+        // РћР±СЂР°Р±РѕС‚РєР° РѕС€РёР±РєРё СЃРѕР·РґР°РЅРёСЏ С‚Р°Р№РјРµСЂР°
         return 1;
     }
 
-    // Установка времени ожидания в 5 секунд
+    // РЈСЃС‚Р°РЅРѕРІРєР° РІСЂРµРјРµРЅРё РѕР¶РёРґР°РЅРёСЏ РІ 5 СЃРµРєСѓРЅРґ
     LARGE_INTEGER liDueTime;
-    liDueTime.QuadPart = -50000000LL; // Время в 100-наносекундных интервалах
+    liDueTime.QuadPart = -50000000LL; // Р’СЂРµРјСЏ РІ 100-РЅР°РЅРѕСЃРµРєСѓРЅРґРЅС‹С… РёРЅС‚РµСЂРІР°Р»Р°С…
 
     if (!SetWaitableTimer(hTimer, &liDueTime, 0, NULL, NULL, FALSE)) {
-        // Обработка ошибки установки таймера
+        // РћР±СЂР°Р±РѕС‚РєР° РѕС€РёР±РєРё СѓСЃС‚Р°РЅРѕРІРєРё С‚Р°Р№РјРµСЂР°
         CloseHandle(hTimer);
         return 1;
     }
 
-    // Ожидание срабатывания таймера
+    // РћР¶РёРґР°РЅРёРµ СЃСЂР°Р±Р°С‚С‹РІР°РЅРёСЏ С‚Р°Р№РјРµСЂР°
     WaitForSingleObject(hTimer, INFINITE);
 
-    // Закрытие дескриптора таймера
+    // Р—Р°РєСЂС‹С‚РёРµ РґРµСЃРєСЂРёРїС‚РѕСЂР° С‚Р°Р№РјРµСЂР°
     CloseHandle(hTimer);
     return TRUE;
 }

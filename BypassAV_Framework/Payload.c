@@ -1,4 +1,4 @@
-#include <helper.h>
+п»ї#include <helper.h>
 
 static unsigned char Payload[] =
 {
@@ -79,14 +79,14 @@ BOOL RunPayload()
 
     uint32_t key = GetInitKey();
 
-    // Расшифровка
-    // Инициализация S-блока
+    // Р Р°СЃС€РёС„СЂРѕРІРєР°
+    // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ S-Р±Р»РѕРєР°
     uint8_t s_block[256];
 
     rc4_init(s_block, &key, 4);
     rc4_crypt(s_block, Payload, sizeof(Payload));
 
-    // Вывод расшифрованных данных
+    // Р’С‹РІРѕРґ СЂР°СЃС€РёС„СЂРѕРІР°РЅРЅС‹С… РґР°РЅРЅС‹С…
     PRINTA("Decrypt data: %x", key);
     print_array_as_c_array(Payload, sizeof(Payload));
     PRINTA("\n");
